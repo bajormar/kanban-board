@@ -26,7 +26,25 @@
     "prestart": "yarn build:styles"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "extends": ["react-app", "prettier"],
+    "plugins": ["react", "prettier"],
+    "parserOptions": {
+      "ecmaVersion": 2018
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "printWidth": 120,
+          "trailingComma": "es5",
+          "singleQuote": true
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -42,6 +60,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
-    "postcss-cli": "^7.1.0"
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "postcss-cli": "^7.1.0",
+    "prettier": "^1.19.1"
   }
 }
