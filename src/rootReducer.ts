@@ -1,6 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import boardReducer from './boardSlice';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  board: boardReducer,
+});
 
 export type RootState = ReturnType<typeof rootReducer>;
 
