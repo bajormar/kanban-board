@@ -1,11 +1,21 @@
 import React from 'react';
-import Board from './Board';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import BoardPage from './BoardPage';
+import TaskDetailsPage from './TaskDetailsPage';
 
 const App: React.FC = () => {
   return (
-    <div className="flex flex-col w-3/4 mx-auto my-12">
-      <h1 className="text-lg mb-2">Kanban board</h1>
-      <Board></Board>
+    <div className="w-3/4 mx-auto my-12">
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <BoardPage />
+          </Route>
+          <Route path="/task/:id">
+            <TaskDetailsPage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

@@ -11,6 +11,8 @@ export type Task = {
   columnId: Column['id'];
   title: string;
   description?: string;
+  createdOn: number;
+  editedOn: number;
 };
 
 const boardSlice = createSlice({
@@ -41,7 +43,7 @@ const boardSlice = createSlice({
     addNewTask(state, action: PayloadAction<{ columnId: Column['id'] }>) {
       const id = uniqueId();
       const { columnId } = action.payload;
-      state.tasks.push({ id, title: `Task (${id})`, columnId });
+      state.tasks.push({ id, title: `Task (${id})`, columnId, createdOn: Date.now(), editedOn: Date.now() });
     },
     editTask(
       state,
@@ -56,6 +58,7 @@ const boardSlice = createSlice({
 
       task.title = title;
       task.description = description;
+      task.editedOn = Date.now();
     },
   },
 });

@@ -6,6 +6,7 @@ import { AppDispatch } from './store';
 import { addNewColumn, addNewTask, removeColumn, editColumnName, Column, editTask } from './boardSlice';
 import Input from './Input';
 import TaskEditModal from './TaskEditModal';
+import { Link } from 'react-router-dom';
 
 const Board: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -104,6 +105,9 @@ const Board: React.FC = () => {
                             <div>
                               <div className="text-md font-bold">{task.title}</div>
                               <div className="text-sm text-gray-600">{task.description}</div>
+                              <Link className="text-blue-500 hover:text-blue-700" to={`/task/${task.id}`}>
+                                Details
+                              </Link>
                             </div>
                             <Button
                               className="ml-auto"
