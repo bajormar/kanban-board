@@ -32,8 +32,8 @@ const boardSlice = createSlice({
       state.columns.push({ id, name: `Column (${id})` });
     },
     removeColumn(state, action: PayloadAction<{ columnId: Column['id'] }>) {
-      state.columns = state.columns.filter(column => column.id !== action.payload.columnId);
       //TODO: what to do with tasks assigned to this column ???
+      state.columns = state.columns.filter(column => column.id !== action.payload.columnId);
     },
     editColumnName(state, action: PayloadAction<{ columnId: Column['id']; columnName: Column['name'] }>) {
       const { columnId, columnName } = action.payload;
@@ -69,6 +69,9 @@ const boardSlice = createSlice({
       task.description = description;
       task.editedOn = Date.now();
     },
+    removeTask(state, action: PayloadAction<{ taskId: Task['id'] }>) {
+      state.tasks = state.tasks.filter(task => task.id !== action.payload.taskId);
+    },
   },
 });
 
@@ -79,6 +82,7 @@ export const {
   replaceBoardState,
   addNewTask,
   editTask,
+  removeTask,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

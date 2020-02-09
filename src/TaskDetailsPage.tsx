@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './rootReducer';
+import Button from './Button';
+import { AppDispatch } from './store';
+import { removeTask } from './boardSlice';
 
 const TaskDetailsPage: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { id } = useParams();
+  const history = useHistory();
 
   const { columns, tasks } = useSelector((state: RootState) => state.board);
 
@@ -48,6 +54,17 @@ const TaskDetailsPage: React.FC = () => {
         <div className="font-bold">Edited</div>
         <div className="ml-2">{task.editedOn}</div>
       </div>
+
+      <Button
+        color="danger"
+        className="mt-2"
+        onClick={() => {
+          dispatch(removeTask({ taskId: task.id }));
+          history.push('/');
+        }}
+      >
+        Delete
+      </Button>
     </>
   );
 };
