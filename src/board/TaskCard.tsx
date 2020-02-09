@@ -16,7 +16,7 @@ const TaskCard: React.FC<Props> = ({ task }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="flex items-center border p-4 mb-2">
+    <div className="flex items-center border p-4 mb-2" data-testid="board-task">
       <div>
         <div className="text-md font-bold">{task.title}</div>
         <div className="text-sm text-gray-600">{task.description}</div>

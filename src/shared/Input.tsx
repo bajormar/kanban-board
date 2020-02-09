@@ -42,6 +42,7 @@ const Input: React.FC<Props> = ({
           onChange(e.currentTarget.value);
         }
       }}
+      aria-label="input"
     />
   );
 };

@@ -16,7 +16,7 @@ const BoardColumnHeader: React.FC<Props> = ({ column }) => {
   const [editableColumnName, setEditableColumnName] = useState<Column['name']>('');
 
   return (
-    <div key={column.id} className="flex items-center border-b p-4">
+    <div key={column.id} className="flex items-center border-b p-4" data-testid="board-column-header">
       {editModeEnabled ? (
         <Input value={editableColumnName} placeholder="Enter column name" onChange={setEditableColumnName} />
       ) : (

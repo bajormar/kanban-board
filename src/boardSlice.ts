@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { uniqueId } from 'lodash-es';
+
+const uniqueId = (() => {
+  let lastId = 0;
+  return () => {
+    lastId++;
+    return String(lastId);
+  };
+})();
 
 export type Column = {
   id: string;
