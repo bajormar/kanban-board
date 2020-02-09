@@ -15,12 +15,17 @@ export type Task = {
   editedOn: number;
 };
 
+type BoardState = {
+  columns: Column[];
+  tasks: Task[];
+};
+
 const boardSlice = createSlice({
   name: 'board',
   initialState: {
-    columns: [] as Column[],
-    tasks: [] as Task[],
-  },
+    columns: [],
+    tasks: [],
+  } as BoardState,
   reducers: {
     addNewColumn(state) {
       const id = uniqueId();
@@ -39,6 +44,10 @@ const boardSlice = createSlice({
       }
 
       column.name = columnName;
+    },
+    replaceBoardState(state, action: PayloadAction<BoardState>) {
+      state.columns = action.payload.columns;
+      state.tasks = action.payload.tasks;
     },
     addNewTask(state, action: PayloadAction<{ columnId: Column['id'] }>) {
       const id = uniqueId();
@@ -63,6 +72,13 @@ const boardSlice = createSlice({
   },
 });
 
-export const { addNewColumn, removeColumn, editColumnName, addNewTask, editTask } = boardSlice.actions;
+export const {
+  addNewColumn,
+  removeColumn,
+  editColumnName,
+  replaceBoardState,
+  addNewTask,
+  editTask,
+} = boardSlice.actions;
 
 export default boardSlice.reducer;
