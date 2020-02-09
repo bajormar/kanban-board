@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 import { RootState } from './rootReducer';
 import Button from './Button';
 import { AppDispatch } from './store';
-import { addNewColumn, addNewTask } from './boardSlice';
+import { addNewColumn, addNewTask, changeTaskColumn } from './boardSlice';
 import TaskCard from './TaskCard';
 import BoardColumnHeader from './BoardColumnHeader';
 
@@ -26,28 +28,65 @@ const Board: React.FC = () => {
         {!columns.length && <div className="flex my-2 border p-4">No columns</div>}
         {columns.length > 0 && (
           <div className="flex my-2">
-            {columns.map(column => {
-              return (
-                <div key={column.id} className="flex-1 border">
-                  <BoardColumnHeader column={column} />
-                  <div className="p-4">
-                    {tasks
-                      .filter(task => task.columnId === column.id)
-                      .map(task => {
-                        return <TaskCard key={task.id} task={task} />;
-                      })}
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        dispatch(addNewTask({ columnId: column.id }));
+            <DragDropContext
+              onDragEnd={({ source, destination, draggableId }) => {
+                if (!destination) {
+                  return;
+                }
+
+                if (source.droppableId === destination.droppableId) {
+                  return;
+                }
+
+                dispatch(changeTaskColumn({ taskId: draggableId, columnId: destination.droppableId }));
+              }}
+            >
+              {columns.map(column => {
+                return (
+                  <div key={column.id} className="flex-1 border">
+                    <Droppable droppableId={column.id}>
+                      {provided => {
+                        return (
+                          <div ref={provided.innerRef}>
+                            <BoardColumnHeader column={column} />
+                            <div className="p-4">
+                              {tasks
+                                .filter(task => task.columnId === column.id)
+                                .map((task, index) => {
+                                  return (
+                                    <Draggable key={task.id} draggableId={task.id} index={index}>
+                                      {provided => {
+                                        return (
+                                          <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                          >
+                                            <TaskCard task={task} />
+                                          </div>
+                                        );
+                                      }}
+                                    </Draggable>
+                                  );
+                                })}
+                              {provided.placeholder}
+                              <Button
+                                color="primary"
+                                onClick={() => {
+                                  dispatch(addNewTask({ columnId: column.id }));
+                                }}
+                              >
+                                Add new task
+                              </Button>
+                            </div>
+                          </div>
+                        );
                       }}
-                    >
-                      Add new task
-                    </Button>
+                    </Droppable>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </DragDropContext>
           </div>
         )}
       </div>

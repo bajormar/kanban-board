@@ -72,6 +72,16 @@ const boardSlice = createSlice({
     removeTask(state, action: PayloadAction<{ taskId: Task['id'] }>) {
       state.tasks = state.tasks.filter(task => task.id !== action.payload.taskId);
     },
+    changeTaskColumn(state, action: PayloadAction<{ taskId: Task['id']; columnId: Column['id'] }>) {
+      const { taskId, columnId } = action.payload;
+      const task = state.tasks.find(t => t.id === taskId);
+
+      if (!task) {
+        return;
+      }
+
+      task.columnId = columnId;
+    },
   },
 });
 
@@ -83,6 +93,7 @@ export const {
   addNewTask,
   editTask,
   removeTask,
+  changeTaskColumn,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;
