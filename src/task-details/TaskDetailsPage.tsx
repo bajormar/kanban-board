@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './rootReducer';
-import Button from './Button';
-import { AppDispatch } from './store';
-import { removeTask } from './boardSlice';
+import { RootState } from '../rootReducer';
+import Button from '../shared/Button';
+import { AppDispatch } from '../store';
+import { removeTask } from '../boardSlice';
 
 const TaskDetailsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,7 +17,7 @@ const TaskDetailsPage: React.FC = () => {
   const task = tasks.find(t => t.id === id);
 
   if (!task) {
-    return <div className="container">Task not found</div>;
+    return <div>Task not found</div>;
   }
 
   const column = columns.find(c => c.id === task.columnId);
@@ -47,12 +47,12 @@ const TaskDetailsPage: React.FC = () => {
 
       <div className="flex">
         <div className="font-bold">Created</div>
-        <div className="ml-2">{task.createdOn}</div>
+        <div className="ml-2">{new Date(task.createdOn).toLocaleString()}</div>
       </div>
 
       <div className="flex">
         <div className="font-bold">Edited</div>
-        <div className="ml-2">{task.editedOn}</div>
+        <div className="ml-2">{new Date(task.editedOn).toLocaleString()}</div>
       </div>
 
       <Button

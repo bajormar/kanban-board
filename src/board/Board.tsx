@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { RootState } from './rootReducer';
-import Button from './Button';
-import { AppDispatch } from './store';
-import { addNewColumn, addNewTask, changeTaskColumn } from './boardSlice';
+import { RootState } from '../rootReducer';
+import Button from '../shared/Button';
+import { AppDispatch } from '../store';
+import { addNewColumn, addNewTask, changeTaskColumn } from '../boardSlice';
 import TaskCard from './TaskCard';
 import BoardColumnHeader from './BoardColumnHeader';
 

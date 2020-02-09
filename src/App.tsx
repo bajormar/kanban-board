@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import BoardPage from './BoardPage';
-import TaskDetailsPage from './TaskDetailsPage';
+import BoardPage from './board/BoardPage';
+import TaskDetailsPage from './task-details/TaskDetailsPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from './store';
 import { replaceBoardState } from './boardSlice';

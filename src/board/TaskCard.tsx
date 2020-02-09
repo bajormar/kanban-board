@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Button from './Button';
+import Button from '../shared/Button';
 import TaskEditModal from './TaskEditModal';
-import { editTask, Task } from './boardSlice';
+import { editTask, Task } from '../boardSlice';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from './store';
+import { AppDispatch } from '../store';
 
 type Props = {
   task: Task;

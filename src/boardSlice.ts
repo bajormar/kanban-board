@@ -32,7 +32,7 @@ const boardSlice = createSlice({
       state.columns.push({ id, name: `Column (${id})` });
     },
     removeColumn(state, action: PayloadAction<{ columnId: Column['id'] }>) {
-      //TODO: what to do with tasks assigned to this column ???
+      //TODO: what to do with tasks assigned to this column ??? Not specified in requirements
       state.columns = state.columns.filter(column => column.id !== action.payload.columnId);
     },
     editColumnName(state, action: PayloadAction<{ columnId: Column['id']; columnName: Column['name'] }>) {

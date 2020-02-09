@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Column, editColumnName, removeColumn } from './boardSlice';
-import Input from './Input';
-import Button from './Button';
+import { Column, editColumnName, removeColumn } from '../boardSlice';
+import Input from '../shared/Input';
+import Button from '../shared/Button';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from './store';
+import { AppDispatch } from '../store';
 
 type Props = {
   column: Column;

@@ -1,6 +1,6 @@
 import React from 'react';
-import Input from './Input';
-import Button from './Button';
+import Input from '../shared/Input';
+import Button from '../shared/Button';
 import ReactModal from 'react-modal';
 import { useForm } from 'react-hook-form';
 
